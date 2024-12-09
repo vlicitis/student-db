@@ -1,1 +1,3 @@
-*.o student_db
+*.o 
+student_db
+.vscode
