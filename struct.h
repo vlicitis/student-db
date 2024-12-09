@@ -1,4 +1,4 @@
-typedef struct student_t {
+typedef struct {
     char firstname[32];
     char lastname[32];
     uint8_t kurs;
