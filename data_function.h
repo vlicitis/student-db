@@ -27,22 +27,32 @@ void output_data(student* db_ptr, uint8_t size) {
 
 void save_db(const char* filename, student* db_ptr, uint8_t size) {
 	if (!db_ptr) {printf("NULLPTR \n");return;};
-	int file = open(filename, O_CREAT | O_WRONLY, 0600);
+	int file = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0600);
     if (file > 0) {
 	    write(file, db_ptr, size * sizeof(student));
     };
 	close(file);
 }
 
-student* load_db(const char* filename, uint8_t size) {
+student* load_db(const char* filename, uint8_t* ret_num_entries) {
+    uint8_t num_entries = 0;
+    uint8_t bytes_read = 0;
 	int file = open(filename, O_RDONLY);
 	if (file < 0) {printf("No existing database ! \n");return NULL;};
-    student* return_ptr = malloc(size * sizeof(student));
-    read(file, return_ptr, size * sizeof(student)); // read all
-    if (errno) {
-        free(return_ptr);
-        return_ptr = NULL;
+
+    student* return_ptr = malloc(sizeof(student));
+    while(1) {
+        bytes_read = read(file, return_ptr + num_entries, sizeof(student)); // read one
+        if (bytes_read < sizeof(student)) {
+            close(file);
+            *ret_num_entries = num_entries;
+            return return_ptr;
+        }
+        num_entries++;
+        return_ptr = realloc(return_ptr, (num_entries + 1) * sizeof(student));
+        if (!return_ptr) {
+            printf("CANT MALLOC\n");
+            return NULL;
+        }
     }
-	close(file);
-    return return_ptr;
 }
