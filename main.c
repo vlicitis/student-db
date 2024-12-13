@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "data_function.h"
+#include "functions.h"
 #define MAX_STUDENTS (UINT8_MAX-1) // 254
 #define db_filename "db.bin"
 
@@ -15,8 +15,8 @@ int main() {
     if (input_char == 'y' || input_char == 'Y') {
         
         students = load_db(db_filename, &student_cnt);
-        output_data(students, student_cnt);
         if (students) {
+            output_data(students, student_cnt);
             free(students);
             students = NULL;
         }
