@@ -11,6 +11,7 @@ int main() {
     student* students;
     printf("Read existing database (y/n)? ");
     scanf(" %[yn]c", &input_char);
+	printf("\n");
     //printf("%#d \n", input_char);
     if (input_char == 'y' || input_char == 'Y') {
         
@@ -23,11 +24,12 @@ int main() {
     }
     printf("Append to database (y/n) ?");
     scanf(" %[yn]c", &input_char);
+	printf("\n");
     //printf("%d \n", input_char);
     if (input_char == 'y' || input_char == 'Y') {
         printf("Enter students count: ");
         scanf("%hhu", &student_cnt);
-    
+    	printf("\n");
         students = calloc(student_cnt, sizeof(student));
         enter_data(students, student_cnt);
         save_db(db_filename, students, student_cnt);
