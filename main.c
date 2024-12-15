@@ -9,9 +9,8 @@ uint8_t student_cnt = 0;
 int main() {
     char input_char;
     student* students;
-    printf("Read existing database (y/n)? ");
+    printf("Read existing database (y/n)? \n");
     scanf(" %[yn]c", &input_char);
-	printf("\n");
     //printf("%#d \n", input_char);
     if (input_char == 'y' || input_char == 'Y') {
         
@@ -22,14 +21,13 @@ int main() {
             students = NULL;
         }
     }
-    printf("Append to database (y/n) ?");
+    printf("Append to database (y/n)? \n");
     scanf(" %[yn]c", &input_char);
 	printf("\n");
     //printf("%d \n", input_char);
     if (input_char == 'y' || input_char == 'Y') {
-        printf("Enter students count: ");
+        printf("Enter students count: \n");
         scanf("%hhu", &student_cnt);
-    	printf("\n");
         students = calloc(student_cnt, sizeof(student));
         enter_data(students, student_cnt);
         save_db(db_filename, students, student_cnt);
