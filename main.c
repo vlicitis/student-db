@@ -7,14 +7,12 @@
 
 uint8_t student_cnt = 0;
 int main() {
-    char * input_char = malloc(sizeof(char));
-    size_t * pointer_to_one = malloc(sizeof(size_t));
-    *pointer_to_one = 1;
+    char input_char = 0;
     student* students;
     printf("Read existing database (y/n)? \n");
-    getline(&input_char, pointer_to_one, stdin);
+    scanf(" %[yn]c", &input_char);
     //printf("%#d \n", input_char);
-    if (input_char[0] == 'y' || input_char[0] == 'Y') {
+    if (input_char == 'y' || input_char == 'Y') {
         
         students = load_db(db_filename, &student_cnt);
         if (students) {
@@ -24,16 +22,14 @@ int main() {
         }
     }
     printf("Append to database (y/n)? \n");
-    getline(&input_char, pointer_to_one, stdin);
+    scanf(" %[yn]c", &input_char);
 	printf("\n");
     //printf("%d \n", input_char);
-    if (input_char[0] == 'y' || input_char[0] == 'Y') {
+    if (input_char == 'y' || input_char == 'Y') {
         printf("Enter students count: \n");
-        scanf("%hhu", &student_cnt);
+        scanf(" %hhu", &student_cnt);
         students = calloc(student_cnt, sizeof(student));
         enter_data(students, student_cnt);
         save_db(db_filename, students, student_cnt);
     }
-    free(input_char);
-    free(pointer_to_one);
 }
