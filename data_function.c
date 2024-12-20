@@ -10,17 +10,17 @@
 void enter_data(student* db_ptr, uint8_t size) {
     if (db_ptr == NULL) {printf("NULLPTR !\n");return;};
     for (uint8_t i = 0; i < size; i++) {
-        printf("Student %u \r\nEnter data (firstname, lastname, course, group): \r\n",i+1);
-        scanf("%32s %32s %hu %hu", db_ptr[i].firstname, db_ptr[i].lastname, &db_ptr[i].kurs, &db_ptr[i].grupa);
-        printf("\r\n");
+        printf("Enter data for Student %u (firstname, lastname, course, group): \n\n",i+1);
+        scanf("%32s %32s %hhu %hhu", db_ptr[i].firstname, db_ptr[i].lastname, &db_ptr[i].kurs, &db_ptr[i].grupa);
+        printf("\n");
     }        
 }
 
 void output_data(student* db_ptr, uint8_t size) {
     if (db_ptr == NULL) {printf("NULLPTR !\n");return;};
-    printf("Student No\tFirstname\tLastname\tCourse\tGroup\r\n");
+    printf("Student No\tFirstname\tLastname\tCourse\tGroup \n");
     for (uint8_t i = 0; i<size; i++) {
-    printf("%d:\t\t%s\t\t%s\t\t%u\t\t%u\r\n", i, db_ptr[i].firstname, db_ptr[i].lastname, db_ptr[i].kurs, db_ptr[i].grupa);
+    printf("%d:\t\t%s\t\t%s\t\t%u\t\t%u \n", i, db_ptr[i].firstname, db_ptr[i].lastname, db_ptr[i].kurs, db_ptr[i].grupa);
     }
 }
 
