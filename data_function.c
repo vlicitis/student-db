@@ -20,18 +20,22 @@ void output_data(student* db_ptr, uint8_t size) {
     if (db_ptr == NULL) {printf("NULLPTR !\n");return;};
     printf("Student No\tFirstname\tLastname\tCourse\tGroup \n");
     for (uint8_t i = 0; i<size; i++) {
-    printf("%d:\t\t%s\t\t%s\t\t%u\t\t%u \n", i, db_ptr[i].firstname, db_ptr[i].lastname, db_ptr[i].kurs, db_ptr[i].grupa);
+    printf("%d.\t\t%s\t\t%s\t\t%u\t\t%u \n", (i+1), db_ptr[i].firstname, db_ptr[i].lastname, db_ptr[i].kurs, db_ptr[i].grupa);
     }
 }
 
 
 
 void save_db(const char* filename, student* db_ptr, uint8_t size) {
-	if (!db_ptr) {printf("NULLPTR \n");return;};
 	int file = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0600);
-    if (file > 0) {
-	    write(file, db_ptr, size * sizeof(student));
-    };
+
+    if (file < 0 || !db_ptr || size == 0) {
+				printf("Not saved !\n");
+				return;
+	}
+
+	write(file, db_ptr, size * sizeof(student));
+	printf("Changes saved !\n");
 	close(file);
 }
 

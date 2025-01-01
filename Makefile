@@ -1,7 +1,7 @@
 CC = gcc
 BIN = student_db
 SOURCES = data_function.c main.c
-HEADERS = functions.h struct.h
+HEADERS = data_function.h struct.h
 OBJECTS = $(SOURCES:.c=.o)
 
 $(BIN): $(OBJECTS) $(HEADERS)

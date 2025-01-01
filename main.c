@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "functions.h"
+#include "data_function.h"
 #define MAX_STUDENTS (UINT8_MAX-1) // 254
 #define db_filename "db.bin"
 
