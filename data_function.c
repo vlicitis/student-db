@@ -27,13 +27,15 @@ void output_data(student* db_ptr, uint8_t size) {
 
 
 void save_db(const char* filename, student* db_ptr, uint8_t size) {
-	int file = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0600);
-
-    if (file < 0 || !db_ptr || size == 0) {
-				printf("Not saved !\n");
-				return;
+    if (!db_ptr || size == 0) {
+			printf("Not saved !\n");
+			return;
 	}
-
+	int file = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0600);
+	if (file < 0) {
+			printf("Can't open file !\n");
+			return;
+	}
 	write(file, db_ptr, size * sizeof(student));
 	printf("Changes saved !\n");
 	close(file);
